@@ -1,0 +1,129 @@
+﻿@model RegistroViewModel
+
+@{
+    ViewData["Title"] = "Registro";
+    var hasValidationErrors = ViewData.ModelState.ErrorCount > 0;
+}
+
+<form class="row bg-lightgray pt-5 pb-4 px-3 rounded w-50" role="form" asp-action="Create" asp-antiforgery="true">
+
+    <div class="d-flex flex-row justify-content-between align-items-end">
+        <h2>
+            <i class="bi bi-person-fill"></i>
+            Registro
+        </h2>
+        <img width="100px" src="~/images/containrs_logo.png" />
+    </div>
+
+    <div class="form-group col-12 mt-2">
+        <label class="form-label" asp-for="Nome"></label>
+        <input class="form-control" asp-for="Nome"/>
+        <span class="is-invalid text-danger small" asp-validation-for="Nome"></span>
+    </div>
+
+    <div class="form-group col-6 mt-2">
+        <label class="form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span class="text-danger small" asp-validation-for="Email"></span>
+    </div>
+
+    <div class="form-group col-3 mt-2">
+        <label class="form-label" asp-for="CPF"></label>
+        <input class="form-control" asp-for="CPF" />
+        <span class="text-danger small" asp-validation-for="CPF"></span>
+    </div>
+
+    <div class="form-group col-3 mt-2">
+        <label class="form-label" asp-for="Nascimento"></label>
+        <input class="form-control" asp-for="Nascimento" />
+        <span class="text-danger small" asp-validation-for="Nascimento"></span>
+    </div>
+
+    <div class="form-group col-3 mt-2">
+        <label class="form-label" asp-for="Celular"></label>
+        <input class="form-control" asp-for="Celular" />
+    </div>
+
+    <div class="form-group col-3 mt-2">
+        <label class="form-label" asp-for="CEP"></label>
+        <input class="form-control" asp-for="CEP" />
+    </div>
+
+    <div class="form-group col-4 mt-2">
+        <label class="form-label" asp-for="Rua"></label>
+        <input class="form-control" asp-for="Rua" />
+    </div>
+
+    <div class="form-group col-2 mt-2">
+        <label class="form-label" asp-for="Numero"></label>
+        <input class="form-control" asp-for="Numero" />
+    </div>
+
+    <div class="form-group col-3 mt-2">
+        <label class="form-label" asp-for="Complemento"></label>
+        <input class="form-control" asp-for="Complemento" />
+    </div>
+
+    <div class="form-group col-5 mt-2">
+        <label class="form-label" asp-for="Bairro"></label>
+        <input class="form-control" asp-for="Bairro" />
+    </div>
+
+    <div class="form-group col-5 mt-2">
+        <label class="form-label" asp-for="Municipio"></label>
+        <input class="form-control" asp-for="Municipio" />
+    </div>
+
+    <div class="form-group col-2 mt-2">
+        <label class="form-label" asp-for="Estado"></label>
+        <input class="form-control" asp-for="Estado" />
+    </div>
+
+    <div class="form-group col-12 mt-3">
+        <button class="btn btn-lg btn-color1 mt-3">Registrar</button>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#CPF').mask('000.000.000-00');
+            $('#Celular').mask('(00) 00000-0000');
+            $('#CEP').mask('00.000-000');
+
+            let debounceTimeout;
+
+            $('#CEP').on('input', function () {
+                clearTimeout(debounceTimeout); 
+                var query = $(this).cleanVal();
+                console.log(query);
+
+                debounceTimeout = setTimeout(function () {
+                    if (query.length == 8) { 
+                        $.ajax({
+                            url: '/CEP/Consultar', 
+                            data: { cep: query },
+                            success: function (data) {
+                                console.log(data);
+                                $('#Rua').val(data.rua);
+                                $('#Bairro').val(data.bairro);
+                                $('#Municipio').val(data.municipio);
+                                $('#Estado').val(data.estado);
+                            },
+                            error: function () {
+                                console.log('Erro na busca.');
+                            }
+                        });
+                    } else {
+
+                        // Limpar endereço
+                    }
+                }, 300); 
+            });
+
+        });
+    </script>
+}
