@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ContainRs.Domain.Models
 {   
-    public static class  UFStringConverter{
-        public static UnidadeFederativa? From(string? uf)
+    public static class  UfStringConverter{
+        public static UnidadeFederativa? FromString(string? uf)
         {
             if (uf is null) return null;
             return Enum.TryParse<UnidadeFederativa>(uf, true, out var unidadeFederativa) ? unidadeFederativa : null;

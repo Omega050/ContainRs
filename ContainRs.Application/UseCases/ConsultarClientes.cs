@@ -5,8 +5,8 @@ namespace ContainRs.Application.UseCases
 {
     public class ConsultarClientes
     {
-        private readonly IClienteRepository repository;
-        public ConsultarClientes(UnidadeFederativa? estado, IClienteRepository repository)
+        private readonly IClienteReadRepository repository;
+        public ConsultarClientes(UnidadeFederativa? estado, IClienteReadRepository repository)
         {
             Estado = estado;
             this.repository = repository;

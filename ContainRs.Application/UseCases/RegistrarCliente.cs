@@ -5,8 +5,8 @@ namespace ContainRs.Application.UseCases
 {
     public class RegistrarCliente
     {
-        private readonly IClienteRepository repository;
-        public RegistrarCliente(IClienteRepository repository, string nome, Email email, string cPF, DateTime nascimento, string? celular, string? cEP, string? rua, string? numero, string? complemento, string? bairro, string? municipio, UnidadeFederativa? estado)
+        private readonly IClienteAddRepository repository;
+        public RegistrarCliente(IClienteAddRepository repository, string nome, Email email, string cPF, DateTime nascimento, string? celular, string? cEP, string? rua, string? numero, string? complemento, string? bairro, string? municipio, UnidadeFederativa? estado)
         {
             this.repository = repository;
             Nome = nome;

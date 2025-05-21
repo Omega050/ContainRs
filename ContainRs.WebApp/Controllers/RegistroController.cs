@@ -28,7 +28,7 @@ public class RegistroController : Controller
     {
         if (!ModelState.IsValid) return View("Index", form);
 
-        var useCase = new RegistrarCliente(context, form.Nome, new Email(form.Email), form.CPF, form.Nascimento, form.Celular, form.CEP, form.Rua, form.Numero, form.Complemento, form.Bairro, form.Municipio, form.Estado);
+        var useCase = new RegistrarCliente(context, form.Nome, new Email(form.Email), form.CPF, form.Nascimento, form.Celular, form.CEP, form.Rua, form.Numero, form.Complemento, form.Bairro, form.Municipio, UfStringConverter.FromString(form.Estado));
 
         await useCase.ExecutarAsync();
 

@@ -34,7 +34,7 @@ public class ApiRegistroController : Controller
             request.Complemento,
             request.Bairro,
             request.Municipio,
-            request.Estado
+            UfStringConverter.FromString(request.Estado)
         );
 
         await useCase.ExecutarAsync();

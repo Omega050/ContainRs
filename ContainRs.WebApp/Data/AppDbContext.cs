@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContainRs.WebApp.Data;
 
-public class AppDbContext : DbContext, IClienteRepository
+public class AppDbContext : DbContext, IClienteAddRepository
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -37,5 +37,8 @@ public class AppDbContext : DbContext, IClienteRepository
             });
         modelBuilder.Entity<Cliente>()
             .Property(c => c.CPF).IsRequired();
+        modelBuilder.Entity<Cliente>()
+            .Property(c => c.Estado)
+            .HasConversion<string>();
     }
 }
