@@ -35,10 +35,9 @@ public class AppDbContext : DbContext, IClienteAddRepository
                     .HasColumnName("Email")
                     .IsRequired();
             });
+        modelBuilder.Entity<Cliente>().ToTable("Clientes");
+
         modelBuilder.Entity<Cliente>()
             .Property(c => c.CPF).IsRequired();
-        modelBuilder.Entity<Cliente>()
-            .Property(c => c.Estado)
-            .HasConversion<string>();
     }
 }

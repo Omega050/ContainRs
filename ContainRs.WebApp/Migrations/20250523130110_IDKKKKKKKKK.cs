@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ContainRs.WebApp.Data.Migrations
+namespace ContainRs.WebApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class IDKKKKKKKKK : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,6 +19,7 @@ namespace ContainRs.WebApp.Data.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CPF = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Celular = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rua = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -26,8 +27,7 @@ namespace ContainRs.WebApp.Data.Migrations
                     Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Municipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Estado = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

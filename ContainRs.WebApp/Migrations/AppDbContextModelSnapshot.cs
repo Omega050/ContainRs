@@ -4,19 +4,16 @@ using ContainRs.WebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ContainRs.WebApp.Data.Migrations
+namespace ContainRs.WebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250519210339_AddNascimentoToCliente")]
-    partial class AddNascimentoToCliente
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace ContainRs.WebApp.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Cliente", b =>
+            modelBuilder.Entity("ContainRs.Domain.Models.Cliente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,8 +44,8 @@ namespace ContainRs.WebApp.Data.Migrations
                     b.Property<string>("Complemento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Estado")
+                        .HasColumnType("int");
 
                     b.Property<string>("Municipio")
                         .HasColumnType("nvarchar(max)");
@@ -71,9 +68,9 @@ namespace ContainRs.WebApp.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Cliente", b =>
+            modelBuilder.Entity("ContainRs.Domain.Models.Cliente", b =>
                 {
-                    b.OwnsOne("ContainRs.WebApp.Models.Email", "Email", b1 =>
+                    b.OwnsOne("ContainRs.Domain.Models.Email", "Email", b1 =>
                         {
                             b1.Property<Guid>("ClienteId")
                                 .HasColumnType("uniqueidentifier");

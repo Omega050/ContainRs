@@ -1,20 +1,27 @@
-﻿using System.Linq.Expressions;
-using ContainRs.Application.Repositories;
+﻿using ContainRs.Application.Repositories;
 using ContainRs.Domain.Models;
+using ContainRs.WebApp.Data;
 using Microsoft.EntityFrameworkCore;
-namespace ContainRs.WebApp.Data;
+using System.Linq.Expressions;
 
-public class AppDbReadClient : IClienteReadRepository
+public class AppDbReadClient : DbContext, IClienteReadRepository
 {
-    public DbSet<Cliente> Clientes { get; set; }
-    public async Task<IEnumerable<Cliente>> GetAsync(Expression<Func<Cliente, bool>>? filtro = default)
+    private readonly AppDbContext _context;
+
+    public AppDbReadClient(AppDbContext context)
     {
-        IQueryable<Cliente> query = this.Clientes;
-        if (filtro is not null)
+        _context = context;
+    }
+
+    public async Task<IEnumerable<Cliente>> GetAsync(Expression<Func<Cliente, bool>>? filtro)
+    {
+        IQueryable<Cliente> queryClientes = _context.Clientes; 
+        if (filtro != null)
         {
-            query = query.Where(filtro);
+            queryClientes = queryClientes.Where(filtro);
         }
-        return await query.AsNoTracking().ToListAsync();
+        return await queryClientes
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
-

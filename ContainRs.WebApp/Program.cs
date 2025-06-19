@@ -22,8 +22,6 @@ builder.Services
         client.DefaultRequestHeaders.Add("Accept", "application/json");
     });
 
-builder.Services.AddScoped<AppDbReadClient>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

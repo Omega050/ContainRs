@@ -24,4 +24,8 @@
     <ProjectReference Include="..\ContainRs.Application\ContainRs.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>
